@@ -97,8 +97,7 @@ PlayerSection:NewButton("Remove fall damage", "Stops you from taking fall damage
 end)
 wait(0.06)
 PlayerSection:NewButton("Remove sandstorm overlay", "Removes that annoying overlay in a sandstorm", function() 
-	Lib.prompt("Success!", "Now blocking the sandstorm overlay.", 3)
-	Lib.prompt("Note", "In some cases, this may not take affect until the next round.", 5)
+	Lib.prompt("Success!", "Now blocking the sandstorm overlay. In some cases, this may not take affect until the next round.", 7)
 	game.Players.LocalPlayer.PlayerGui.ChildAdded:Connect(function(newgui)
 		if newgui.Name == "SandStormGui" then
 			newgui:remove()
