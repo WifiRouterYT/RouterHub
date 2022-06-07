@@ -27,6 +27,8 @@ wait(0.1)
 getgenv().SSToggled = false
 getgenv().FWToggled = false
 getgenv().PDToggled = false
+getgenv().scriptName = "none"
+getgenv().cmdlineenabled = false
 
 getgenv().complete = false
 
@@ -218,6 +220,47 @@ SettingsSection:NewDropdown("Theme Selector", "Changes the look of the GUI", {"L
 end)
 SettingsSection:NewKeybind("Keybind - Toggle GUI", "Toggles the GUI visibility.", Enum.KeyCode.LeftAlt, function()
 	Library:ToggleUI()
+end)
+SettingsSection:NewDropdown("Manually Select Script", "Gives you an option to choose another game script", {"Natural Disaster Survival", "Destruction Simulator", "Universal"}, function(currentOption)
+	if(currentOption == "Natural Disaster Survival") then
+		Lib.prompt("Warning", "No need to change scripts, already loaded.", 3)
+		return
+	end
+	getgenv().scriptName = currentOption
+
+	Lib.prompt("Script Changer", "Attempting to load script...", 3)
+	if (getgenv().scriptName == "none") then
+		Lib.prompt("ERROR", "An error occured while changing scripts (Failed to get selected script name)", 5)
+		return
+	elseif (getgenv().scriptName == "Destruction Simulator") then
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/WifiRouterYT/RouterHub/main/DS.lua"))()
+	elseif (getgenv().scriptName == "Universal") then
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/WifiRouterYT/RouterHub/main/universal.lua"))()
+	end
+	Library:ToggleUI()
+end)
+SettingsSection:NewButton("Enable Command Line [Alpha]", "⚠️ Some scripts there may get you banned!", function() 
+	if(getgenv().cmdlineenabled == true) then
+		Lib.prompt("Error!", "Already enabled!", 3)
+		return
+	end
+	Lib.prompt("Additional module enabled.", "The command line has been enabled. Use with caution.", 5)
+	getgenv().cmdlineenabled = true
+	local CMDLine = Window:NewTab("Command Line")
+	local CMDSection = CMDLine:NewSection("Type 'help' for a list of commands.")
+	CMDSection:NewTextBox("Command:", "Input your command here.", function(txt)
+		local hours = os.date("*t")["hour"] -- for hour irl
+		local mins = os.date("*t")["min"] -- for min irl
+		if(txt == "help") then
+			CMDSection.NewLabel("[" ..hours .. ":" ..mins .. "] exitgame - Kicks you from the game", "[" ..hours .. ":" ..mins .. "] exitgame - Kicks you from the game")
+		elseif(txt == "exitgame") then
+			CMDSection.NewLabel("[" ..hours .. ":" ..mins .. "] Kicking you from the game...", "[" ..hours .. ":" ..mins .. "] Kicking you from the game...")
+			wait(1)
+			game.Players.LocalPlayer:Kick("RouterHub - You may now close the game.")
+		else
+			CMDSection.NewLabel("[" ..hours .. ":" ..mins .. "] Command not found.", "[" ..hours .. ":" ..mins .. "] Command not found.")
+		end
+	end)
 end)
 
 -- Loops
