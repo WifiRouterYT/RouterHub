@@ -12,11 +12,17 @@ Lib.prompt('Welcome', "Welcome to WifiRouter's NDS script! You can use Left Alt 
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Natural Disaster Survival")
+wait(0.1)
 local Player = Window:NewTab("Player")
+wait(0.1)
 local ServerSide = Window:NewTab("Server-Side")
+wait(0.1)
 local Teleport = Window:NewTab("Teleport")
+wait(0.1)
 local Automation = Window:NewTab("Automation")
+wait(0.1)
 local Settings = Window:NewTab("Settings")
+wait(0.1)
 
 getgenv().SSToggled = false
 getgenv().FWToggled = false
@@ -27,16 +33,20 @@ getgenv().complete = false
 votemenu = game.Players.LocalPlayer.PlayerGui.MainGui.MapVotePage
 
 local PlayerSection = Player:NewSection("Player - Scripts for your avatar")
+wait(0.1)
 PlayerSection:NewSlider("Walk Speed", "Changes how fast you walk", 200, 20, function(s) -- 500 (MaxValue) | 0 (MinValue)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
+wait(0.1)
 PlayerSection:NewSlider("Jump Power", "Changes how high you jump", 200, 48, function(s) -- 500 (MaxValue) | 0 (MinValue)
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
 end)
+wait(0.1)
 PlayerSection:NewButton("Reset Character", "Kills your avatar.", function()
     game.Players.LocalPlayer.Character.Humanoid.Health = 0
 	Lib.prompt('Success!', 'Killed your avatar.', 3)
 end)
+wait(0.1)
 PlayerSection:NewButton("Rejoin", "Kicks you and then rejoins into the same server.", function()
 	Lib.prompt('', 'One moment please...', 3)
 	wait(2)
@@ -45,11 +55,13 @@ PlayerSection:NewButton("Rejoin", "Kicks you and then rejoins into the same serv
 	local p = game:GetService("Players").LocalPlayer
 	ts:Teleport(game.PlaceId, p)
 end)
+wait(0.1)
 PlayerSection:NewButton("Server Hop", "Connects you to a different server.", function()
 	Lib.prompt('Please wait!', 'Finding a server...', 3)
 	wait(0.7)
 	module:Teleport(game.PlaceId)
 end)
+wait(0.1)
 PlayerSection:NewButton("Get Green Balloon", "Clones somebody else's Green Balloon to you.", function()
 	Lib.prompt('Get Green Balloon', "Attempting to give you a balloon...", 5)
 	Lib.prompt('Gave item', "Item received. If you didn't get it, that might be because nobody else has one to clone. Try server hopping until it works.", 5)
@@ -76,12 +88,14 @@ PlayerSection:NewButton("Get Green Balloon", "Clones somebody else's Green Ballo
 		wait()
 	end
 end)
+wait(0.1)
 PlayerSection:NewButton("Remove fall damage", "Stops you from taking fall damage.", function() 
 	if game.Players.LocalPlayer.Character:findFirstChild("FallDamageScript") then 
 		game.Players.LocalPlayer.Character.FallDamageScript:remove()
 	end
 	Lib.prompt("Success!", "Fall damage has been removed from your avatar.", 3)
 end)
+wait(0.1)
 PlayerSection:NewButton("Remove sandstorm overlay", "Removes that annoying overlay in a sandstorm", function() 
 	Lib.prompt("Success!", "Now blocking the sandstorm overlay.", 3)
 	Lib.prompt("Note", "In some cases, this may not take affect until the next round.", 5)
@@ -91,7 +105,6 @@ PlayerSection:NewButton("Remove sandstorm overlay", "Removes that annoying overl
 		end
 	end)
 end)
-
 
 local FESection = ServerSide:NewSection("Server-side scripts [FE]")
 FESection:NewToggle("Show Vote Menu", "Be able to vote for disasters!", function(state)
@@ -221,7 +234,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		end
     end
 	if getgenv().FWToggled then
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-290, 178, 379)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-290, 180, 379)
 		game.Players.LocalPlayer.Character.Humanoid:MoveTo(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+workspace.Camera.CFrame.lookVector*100)
     end
 	if getgenv().PDToggled then
