@@ -3,4 +3,5 @@ funny roblox exploit
 supported games
  - Natural Disaster Survival
  
- no loader yet
+wip so expect bugs and unfinished stuff
+pls make an issue if something no work
