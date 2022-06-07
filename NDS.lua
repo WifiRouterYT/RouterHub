@@ -34,7 +34,7 @@ votemenu = game.Players.LocalPlayer.PlayerGui.MainGui.MapVotePage
 
 local PlayerSection = Player:NewSection("Player - Scripts for your avatar")
 wait(0.06)
-PlayerSection:NewSlider("Walk Speed", "Changes how fast you walk", 200, 18, function(s) -- 500 (MaxValue) | 0 (MinValue)
+PlayerSection:NewSlider("Walk Speed", "Changes how fast you walk", 200, 19, function(s) -- 500 (MaxValue) | 0 (MinValue)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 wait(0.06)
